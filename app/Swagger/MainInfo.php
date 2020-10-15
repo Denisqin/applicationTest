@@ -5,7 +5,7 @@ namespace App\Swagger;
 
 /**
  * @OA\Info(
- *    title="Биг намбрз",
+ *    title="Test REST API",
  *    version="1.0.0",
  * )
  * @OA\Tag(
