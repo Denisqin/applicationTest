@@ -64,7 +64,7 @@ class OrderController extends Controller
      */
     public function getForExecutor(GetForExecutor $request): OrderCollection
     {
-        return Order::getForExecutor($request);
+        return Order::getForExecutor($request->validated());
     }
 
     /**
@@ -116,7 +116,7 @@ class OrderController extends Controller
      */
     public function index(IndexRequest $request): OrderCollection
     {
-        return Order::filterCollection($request);
+        return Order::filterCollection($request->validated());
     }
 
     /**
