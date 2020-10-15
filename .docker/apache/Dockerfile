@@ -1,3 +1,4 @@
+FROM composer:1.8
 FROM php:7.3-apache
 
 RUN apt-get update && apt-get install -y \
@@ -19,6 +20,7 @@ RUN mkdir /var/www/html/web/
 
 RUN sed -i "s/Listen 80/Listen 8080/" /etc/apache2/ports.conf
 
+COPY --from=0 /usr/bin/composer /usr/bin/composer
 COPY apache.conf /etc/apache2/sites-available/site.conf
 
 RUN a2enmod rewrite \
