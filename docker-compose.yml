@@ -1,0 +1,40 @@
+version: '2'
+services:
+  nginx:
+    build: .docker/nginx
+    ports:
+      - "80:80"
+    volumes_from:
+      - apache
+    environment:
+      TZ: Europe/Moscow
+    depends_on:
+      - apache
+    links:
+      - apache
+  apache:
+    build: .docker/apache
+    expose:
+      - "8080"
+    volumes:
+      - .:/var/www/html
+    depends_on:
+      - db
+    links:
+      - db
+    environment:
+      TZ: Europe/Moscow
+  db:
+    image: postgres:9.5
+    ports:
+      - "5432:5432"
+    volumes:
+      - data-application-db:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: application
+      TZ: Europe/Moscow
+volumes:
+  data-application-db:
+    driver: local

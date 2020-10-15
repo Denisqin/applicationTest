@@ -1,0 +1,1089 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Биг намбрз",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost/api",
+            "description": "API Server"
+        }
+    ],
+    "paths": {
+        "/login": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "авторизация",
+                "operationId": "SignIn",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AuthRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Успешная авторизация",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Auth"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Unauthenticated"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Ошибка валидации",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Validator"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/bids": {
+            "get": {
+                "tags": [
+                    "Bid"
+                ],
+                "summary": "Список заявок",
+                "operationId": "Index",
+                "responses": {
+                    "200": {
+                        "description": "Список объектов",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Bid"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Unauthenticated"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "AccessDenied",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AccessDenied"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Ошибка валидации",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Validator"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Bid"
+                ],
+                "summary": "Создание заявки",
+                "operationId": "Store",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/BidRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Список объектов",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Bid"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Unauthenticated"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "AccessDenied",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AccessDenied"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Ошибка валидации",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Validator"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/bids/{bid}": {
+            "get": {
+                "tags": [
+                    "Bid"
+                ],
+                "summary": "Просмотр конкретной заявки",
+                "operationId": "Show",
+                "responses": {
+                    "200": {
+                        "description": "Список объектов",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Bid"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Unauthenticated"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "AccessDenied",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AccessDenied"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Bid"
+                ],
+                "summary": "Редактирование заявки",
+                "operationId": "Update",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/BidRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Список объектов",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Bid"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Unauthenticated"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "AccessDenied",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AccessDenied"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Ошибка валидации",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Validator"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Bid"
+                ],
+                "summary": "Удаление заявки",
+                "operationId": "Destroy",
+                "responses": {
+                    "200": {
+                        "description": "Удалено"
+                    },
+                    "401": {
+                        "description": "Unauthenticated.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Unauthenticated"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "AccessDenied",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AccessDenied"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/executors/orders": {
+            "get": {
+                "tags": [
+                    "Order"
+                ],
+                "summary": "Список заказов для исполнителя",
+                "operationId": "GetForExecutor",
+                "parameters": [
+                    {
+                        "name": "filter",
+                        "in": "path",
+                        "description": "1) Видит все заказы (Не добавлять в запрос),\n    2) Может видеть Заказы на которые он подал заявки (filter = submitted),\n    3) Может видеть Заказы на исполнение (filter = inWork)",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "submitted"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Список объектов",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Order"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Unauthenticated"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "AccessDenied",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AccessDenied"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Ошибка валидации",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Validator"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/orders": {
+            "get": {
+                "tags": [
+                    "Order"
+                ],
+                "summary": "Список заказов",
+                "operationId": "Index",
+                "parameters": [
+                    {
+                        "name": "filter",
+                        "in": "path",
+                        "description": "accepting = Прием заявок,\n    consideration = Рассмотрение заявок,\n    waiting = Ожидание исполнения заказа,\n    completed = Завершен",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "accepting"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Список объектов",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Order"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Unauthenticated"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "AccessDenied",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AccessDenied"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Ошибка валидации",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Validator"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Order"
+                ],
+                "summary": "Создание заказа",
+                "operationId": "Store",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/OrderRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Список объектов",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Order"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Unauthenticated"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "AccessDenied",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AccessDenied"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Ошибка валидации",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Validator"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/orders/{order}": {
+            "get": {
+                "tags": [
+                    "Order"
+                ],
+                "summary": "Просмотр конкретного заказа",
+                "operationId": "Show",
+                "responses": {
+                    "200": {
+                        "description": "Список объектов",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Order"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Unauthenticated"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "AccessDenied",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AccessDenied"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Order"
+                ],
+                "summary": "Редактирование заказа",
+                "operationId": "Update",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/OrderRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Список объектов",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Order"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Unauthenticated"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "AccessDenied",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AccessDenied"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Ошибка валидации",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Validator"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Order"
+                ],
+                "summary": "Удаление заказа",
+                "operationId": "Destroy",
+                "responses": {
+                    "200": {
+                        "description": "Удалено"
+                    },
+                    "401": {
+                        "description": "Unauthenticated.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Unauthenticated"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "AccessDenied",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AccessDenied"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "AuthRequest": {
+                "title": "Auth Request",
+                "description": "Параметры для авторизации",
+                "properties": {
+                    "email": {
+                        "title": "email",
+                        "description": "email",
+                        "type": "string",
+                        "format": "string",
+                        "example": "firstexecutor@example.com"
+                    },
+                    "password": {
+                        "title": "password",
+                        "description": "password",
+                        "type": "string",
+                        "format": "string",
+                        "example": "password"
+                    }
+                },
+                "type": "object"
+            },
+            "BidRequest": {
+                "title": "Order Request",
+                "description": "Параметры для заказа",
+                "properties": {
+                    "order_id": {
+                        "title": "order_id",
+                        "description": "id Заказа (ИСПОЛЬЗУЕТСЯ В МЕТОДЕ СОЗДАНИЯ)",
+                        "type": "integer",
+                        "format": "integer",
+                        "example": 1
+                    },
+                    "description": {
+                        "title": "description",
+                        "description": "описание",
+                        "type": "string",
+                        "format": "string",
+                        "example": "Поклею обои, стаж 2 года"
+                    },
+                    "price": {
+                        "title": "price",
+                        "description": "Предложите свою стоимость",
+                        "type": "string",
+                        "format": "string",
+                        "example": "5250"
+                    },
+                    "timelimit": {
+                        "title": "timelimit",
+                        "description": "Предложите свое время",
+                        "type": "string",
+                        "format": "string",
+                        "example": "5"
+                    }
+                },
+                "type": "object"
+            },
+            "GetForExecutor": {
+                "title": "GetForExecutor",
+                "description": "Параметры для получения заказов исполнителя",
+                "properties": {
+                    "filter": {
+                        "title": "filter",
+                        "description": "1) Видит все заказы (Не добавлять в запрос),\n    2) Может видеть Заказы на которые он подал заявки (filter = submitted),\n    3) Может видеть Заказы на исполнение (filter = inWork)",
+                        "type": "string",
+                        "format": "string",
+                        "example": "submitted/ inWork"
+                    }
+                },
+                "type": "object"
+            },
+            "OrderRequest": {
+                "title": "Order Request",
+                "description": "Параметры для заказа",
+                "properties": {
+                    "name": {
+                        "title": "name",
+                        "description": "Название заказа",
+                        "type": "string",
+                        "format": "string",
+                        "example": "Ремонт"
+                    },
+                    "description": {
+                        "title": "description",
+                        "description": "описание заказа",
+                        "type": "string",
+                        "format": "string",
+                        "example": "Поклеить обои"
+                    },
+                    "price": {
+                        "title": "price",
+                        "description": "Стоимость",
+                        "type": "string",
+                        "format": "string",
+                        "example": "5250"
+                    },
+                    "timelimit": {
+                        "title": "timelimit",
+                        "description": "Сколько требуется часов",
+                        "type": "string",
+                        "format": "string",
+                        "example": "5"
+                    },
+                    "accepting_end_at": {
+                        "title": "accepting_end_at",
+                        "description": "Дата окончания принятия заявок на заказ",
+                        "type": "string",
+                        "format": "string",
+                        "example": "2020-02-19"
+                    },
+                    "status": {
+                        "title": "status",
+                        "description": "Статус (consideration, completed). ИСПОЛЬЗУЕТСЯ ТОЛЬКО ДЛЯ МЕТОДА ОБНОВЛЕНИЯ",
+                        "type": "string",
+                        "format": "string",
+                        "example": "completed"
+                    },
+                    "executor_id": {
+                        "title": "executor_id",
+                        "description": "ID исполнителя для назначения на заказ.  ИСПОЛЬЗУЕТСЯ ТОЛЬКО ДЛЯ МЕТОДА ОБНОВЛЕНИЯ",
+                        "type": "integer",
+                        "format": "integer",
+                        "example": 1
+                    }
+                },
+                "type": "object"
+            },
+            "AccessDenied": {
+                "title": "AccessDenied",
+                "description": "Доступ запрещен",
+                "properties": {
+                    "message": {
+                        "title": "message",
+                        "description": "У конкретного пользователя нет доступа к методу",
+                        "type": "string",
+                        "format": "string",
+                        "example": "Доступ запрещен"
+                    }
+                },
+                "type": "object"
+            },
+            "Auth": {
+                "title": "Auth Response",
+                "description": "Авторизация",
+                "properties": {
+                    "id": {
+                        "title": "id",
+                        "description": "ID пользователя",
+                        "type": "integer",
+                        "format": "integer",
+                        "example": 1
+                    },
+                    "name": {
+                        "title": "name",
+                        "description": "Имя пользователя",
+                        "type": "string",
+                        "format": "string",
+                        "example": "Ivan"
+                    },
+                    "email": {
+                        "title": "email",
+                        "description": "email он же логин",
+                        "type": "string",
+                        "format": "string",
+                        "example": "example@example.com"
+                    },
+                    "token": {
+                        "title": "token",
+                        "description": "Токен",
+                        "type": "string",
+                        "format": "string",
+                        "example": "eyJ0eXAiOiJKV1QiLCJhtestSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMzBiZjg0MDM1NDY3MGE5OWI2ZDAwODVlMDNhMTE0YmNhYWU5ZWYtestYxNTgyNjUxYzA2NGQ1NWJjOWZmNmMyZmFjNTFiZDIiLCJpYXQiOjE1ODI3ODQwNDQsIm5iZiI6MtestNCwiZXhwIjoxNjE0NDA2NDQ0LCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.FvVt19HB0JUqbGKLDaKL7s1VxctqLw2AdqLJqUq3NzOMGzBaRfoqeFKJPwelUeQTheQuFkeM-G-94UxhrSn8QfNUxWy_ATL6xI720y6Vgp14VAu8E3oCzUmei086n5hx8gEGWIrzbfBtCPjBKiHxUv10vbtYZigFMBQlbgAtestqAGWBoP6VIRabYGO3RtPGP_mZbca89jISnBkKpXYiMbOlkt64Ae_PHdnGJa5EShKntu3zddwUhsX7T9EnSXmOWrJMzuQnTYo1DUsB1cfeizIwUvqqW3QDTHie5G_qWicU5_UeV6AZ4O1IMsUXogbfu-qlddtest4O61R2JTKrCZZhpwfCbe_eJxnb_63JJFXxsqUSqp7FEceQUYLxp5lZ1jQkKmmo_DcqFX1vMap4hcKVkNuu3tauw3TiZjHJM7tZJL6b_wUc7_Ua0MhYBPe7CcfN2D2Y1LBtestv2SVs16GGGHjigzf-zUWSaTbSE_QNqPkcg7Jk5WUX-4QoIpIaX5FRrzZbcvCIkKBJBCaAxFXOLae-cYjFoBU5DYg8JnrfK-uBoiVvJLZKlJG34CH8MFV8sjz8testoFdoN7Zku_PXTR3UD_pKi3xNiO04ZhVVOARMhWcFnfz0z4wn4YJK4nSF0zx7abkh04IEW7U"
+                    }
+                },
+                "type": "object"
+            },
+            "Bid": {
+                "title": "Bid Model",
+                "description": "Модель заявки",
+                "properties": {
+                    "id": {
+                        "title": "id",
+                        "description": "ID заявки",
+                        "type": "integer",
+                        "format": "integer",
+                        "example": 1
+                    },
+                    "description": {
+                        "title": "description",
+                        "description": "описание",
+                        "type": "string",
+                        "format": "string",
+                        "example": "Поклею обои, стаж 2 года"
+                    },
+                    "price": {
+                        "title": "price",
+                        "description": "Предложите свою стоимость",
+                        "type": "string",
+                        "format": "string",
+                        "example": "5250"
+                    },
+                    "timelimit": {
+                        "title": "timelimit",
+                        "description": "Предложите свое время",
+                        "type": "string",
+                        "format": "string",
+                        "example": "5"
+                    },
+                    "status": {
+                        "title": "status",
+                        "description": "Статус заявки",
+                        "type": "string",
+                        "format": "string",
+                        "example": "completed"
+                    },
+                    "created_at": {
+                        "title": "created_at",
+                        "description": "Дата и время создания",
+                        "type": "string",
+                        "format": "string",
+                        "example": "2020-02-19 09:28:57"
+                    },
+                    "order": {
+                        "$ref": "#/components/schemas/Order"
+                    },
+                    "executor": {
+                        "$ref": "#/components/schemas/User"
+                    }
+                },
+                "type": "object"
+            },
+            "Order": {
+                "title": "Order Model",
+                "description": "Модель заказа",
+                "properties": {
+                    "id": {
+                        "title": "id",
+                        "description": "ID Заказа",
+                        "type": "integer",
+                        "format": "integer",
+                        "example": 1
+                    },
+                    "name": {
+                        "title": "name",
+                        "description": "Название заказа",
+                        "type": "string",
+                        "format": "string",
+                        "example": "Ремонт"
+                    },
+                    "description": {
+                        "title": "description",
+                        "description": "описание заказа",
+                        "type": "string",
+                        "format": "string",
+                        "example": "Поклеить обои"
+                    },
+                    "price": {
+                        "title": "price",
+                        "description": "Стоимость",
+                        "type": "string",
+                        "format": "string",
+                        "example": "5250"
+                    },
+                    "timelimit": {
+                        "title": "timelimit",
+                        "description": "Сколько требуется часов",
+                        "type": "string",
+                        "format": "string",
+                        "example": "5"
+                    },
+                    "status": {
+                        "title": "status",
+                        "description": "Статус заказа",
+                        "type": "string",
+                        "format": "string",
+                        "example": "completed"
+                    },
+                    "created_at": {
+                        "title": "created_at",
+                        "description": "Дата и время создания",
+                        "type": "string",
+                        "format": "string",
+                        "example": "2020-02-19 09:28:57"
+                    },
+                    "accepting_end_at": {
+                        "title": "accepting_end_at",
+                        "description": "Дата окончания принятия заявок на заказ",
+                        "type": "string",
+                        "format": "string",
+                        "example": "2020-02-19"
+                    },
+                    "customer": {
+                        "$ref": "#/components/schemas/User"
+                    },
+                    "executor": {
+                        "$ref": "#/components/schemas/User"
+                    }
+                },
+                "type": "object"
+            },
+            "Unauthenticated": {
+                "title": "Unauthenticated",
+                "description": "Не авторизован",
+                "properties": {
+                    "message": {
+                        "title": "message",
+                        "description": "Ошибка авторизации",
+                        "type": "string",
+                        "format": "string",
+                        "example": "Unauthenticated."
+                    }
+                },
+                "type": "object"
+            },
+            "User": {
+                "title": "User Model",
+                "description": "Модель пользователя",
+                "properties": {
+                    "id": {
+                        "title": "id",
+                        "description": "ID пользователя",
+                        "type": "integer",
+                        "format": "integer",
+                        "example": 1
+                    },
+                    "name": {
+                        "title": "name",
+                        "description": "Имя пользователя",
+                        "type": "string",
+                        "format": "string",
+                        "example": "Ivan"
+                    },
+                    "email": {
+                        "title": "email",
+                        "description": "email он же логин",
+                        "type": "string",
+                        "format": "string",
+                        "example": "example@example.com"
+                    },
+                    "created_at": {
+                        "title": "created_at",
+                        "description": "Дата и время создания",
+                        "type": "string",
+                        "format": "string",
+                        "example": "2020-02-19 09:28:57"
+                    },
+                    "updated_at": {
+                        "title": "updated_at",
+                        "description": "Дата и время обновления",
+                        "type": "string",
+                        "format": "string",
+                        "example": "2020-02-19 09:28:57"
+                    },
+                    "role": {
+                        "title": "role",
+                        "description": "Роль",
+                        "type": "string",
+                        "format": "string",
+                        "example": "customer(заказчик)/ executor(исполнитель)"
+                    }
+                },
+                "type": "object"
+            },
+            "Validator": {
+                "title": "Validator",
+                "description": "Валидация",
+                "properties": {
+                    "message": {
+                        "title": "message",
+                        "description": "Ошибка валидации",
+                        "type": "string",
+                        "format": "string",
+                        "example": "The given data was invalid."
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "securitySchemes": {
+            "Authorization": {
+                "type": "apiKey",
+                "name": "Authorization",
+                "in": "header"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Auth",
+            "description": "Авторизация"
+        },
+        {
+            "name": "Order",
+            "description": "Заказы"
+        },
+        {
+            "name": "Bid",
+            "description": "Заявки"
+        }
+    ],
+    "security": [
+        []
+    ]
+}
