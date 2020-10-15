@@ -24,7 +24,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('check:acceptingEndDate')->everyMinute();
+        $schedule->command('check:acceptingEndDate')->daily();
     }
 
     /**

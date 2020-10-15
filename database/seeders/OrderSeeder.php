@@ -22,6 +22,7 @@ class OrderSeeder extends Seeder
                 'timelimit' => '7200',
                 'customer_id' => 1,
                 'status' => 'accepting',
+                'accepting_end_at' => '2020-12-12'
             ],
             [
                 'name' => 'Приложение',
@@ -30,6 +31,7 @@ class OrderSeeder extends Seeder
                 'timelimit' => '7200',
                 'customer_id' => 2,
                 'status' => 'accepting',
+                'accepting_end_at' => '2020-12-12'
             ],
             [
                 'name' => 'Приложение',
@@ -38,6 +40,7 @@ class OrderSeeder extends Seeder
                 'timelimit' => '7200',
                 'customer_id' => 2,
                 'status' => 'accepting',
+                'accepting_end_at' => '2020-12-12'
             ]
         ]);
     }
